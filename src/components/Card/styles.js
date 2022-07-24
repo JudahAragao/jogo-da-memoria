@@ -20,13 +20,13 @@ const Container = styled.div`
     }
 
     ${() => BackCard} {
-        z-index: ${props => props.flipped === true ? 0 : 1};
-        transform: rotateY(${props => props.flipped === true ? '180deg' : '0'});
+        z-index: ${props => props.flip === true ? 0 : 1};
+        transform: rotateY(${props => props.flip === true ? '180deg' : '0'});
     }
 
     ${() => FrontCard} {
-        z-index: ${props => props.flipped === false ? 0 : 1};
-        transform: rotateY(${props => props.flipped === false ? '-180deg' : '0'});
+        z-index: ${props => props.flip === false ? 0 : 1};
+        transform: rotateY(${props => props.flip === false ? '-180deg' : '0'});
     }
 `
 
@@ -42,6 +42,10 @@ const BackImgCard = styled.img.attrs({
 
 const FrontCard = styled.div`
     background-color: #b6b8d8;
+    
+    span {
+        font-size: 45px;
+    }
 `
 
 export {

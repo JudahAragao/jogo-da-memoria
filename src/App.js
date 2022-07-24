@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import * as S from './App.styles'
 import FildGame from "./components/FildGame";
 import Header from "./components/Header";
 import Timer from "./components/Timer";
+
+import GameDynamics from './class/GameDynamics'
+
+var gameDynamics = new GameDynamics()
 
 const App = () => {
 
@@ -17,10 +21,18 @@ const App = () => {
   }
 
   const [countdown, setCountdown] = useState()
+  const [chosenCards, setChosenCards] = useState()
 
   const startTimer = () => {
     setCountdown(<Timer startTimer={startTimer}/>)
+    gameDynamics.startGame()
   }
+
+  let changed = gameDynamics.chosenCards
+
+  useEffect(()=>{
+    setChosenCards(gameDynamics.chosenCards)
+  },[changed])
 
   return (
     <S.GlobalContainer>
@@ -29,7 +41,7 @@ const App = () => {
         startTimer={startTimer}
       />
       {countdown}
-      <FildGame />
+      <FildGame chosenCards={chosenCards} flipCount={gameDynamics.flip}/>
     </S.GlobalContainer>
   )
 }
